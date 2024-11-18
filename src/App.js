@@ -12,6 +12,10 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    alert('Click on Student List');
+  }, []);
+  
   // Fetch students from API
   useEffect(() => {
     const fetchStudents = async () => {
