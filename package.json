@@ -2,7 +2,7 @@
   "name": "student-management-portal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vinayakmandare.github.io/innomaticsInternshipAssignment-8",
+  "homepage": "https://vinayakmandare.github.io/student-mgm-system",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
