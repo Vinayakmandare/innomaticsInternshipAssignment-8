@@ -36,7 +36,7 @@ const StudentList = ({ students, deleteStudent }) => {
       <h2 className="text-center">Student List</h2>
       <div className="search-bar mb-3">
         <input
-          type="text"
+          type="search"
           placeholder="Search by name, email, or class..."
           value={searchTerm}
           className="form-control"
@@ -66,6 +66,11 @@ const StudentList = ({ students, deleteStudent }) => {
                 <Link to={`/student/${student.id}`}>
                   <button className="btn btn-primary me-2">View</button>
                 </Link>
+
+                <Link to={`/student/edit/${student.id}`}>
+                <button className="btn btn-warning me-2">Edit</button>
+                </Link>
+
                 <button
                   onClick={() => handleDelete(student.id)}
                   className="btn btn-danger"

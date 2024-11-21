@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Make navbar items more touch-friendly on smaller screens */
+.navbar-nav .nav-item {
+  margin: 5px 0; /* Add spacing between items for mobile */
+}
+
+.navbar-nav .nav-link {
+  padding: 5px; /* Increase clickable area for better UX on mobile */
+  text-align: center; /* Center-align text for better readability */
+}
+
+/* For screens smaller than 768px (tablets and mobile devices) */
+@media (max-width: 768px) {
+  .chart-container {
+    flex-direction: column; /* Stack charts vertically */
+  }
+
+  .chart {
+    width: 100% !important; /* Ensure the chart takes up full width on mobile */
+    height: 250px; /* Adjust height to be smaller on mobile */
+    margin-bottom: 20px; /* Add space between stacked charts */
+  }
+  .pie{
+    margin-top: 20% !important;
+  }
+  .nav-item{
+    margin-left: -50% !important;
+  }
+  .navbar-brand {
+    font-size: 1.5rem; /* Slightly increase brand font size */
+    text-align: center; /* Center-align brand text */
+    width: 100%; /* Ensure it spans full width */
+  }
+
+  /* Stacking nav items vertically */
+  .navbar-nav {
+    flex-direction: column; /* Stack links vertically */
+    align-items: center; /* Center-align links */
+  }
+}
+
+

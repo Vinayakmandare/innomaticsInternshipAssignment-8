@@ -4,6 +4,8 @@ import StudentRegistration from './pages/StudentRegistration';
 import StudentList from './pages/StudentList';
 import StudentDetails from './pages/StudentDetails';
 import Navigation from './components/Navigation';
+import StudentEdit from './pages/StudentEdit';
+import Dashboard from './pages/Dashboard';
 import { API_URL } from './config';
 import './style.css';
 
@@ -11,11 +13,9 @@ const App = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null); // State for the success message
 
-  useEffect(() => {
-    alert('Click on Student List');
-  }, []);
-  
+
   // Fetch students from API
   useEffect(() => {
     const fetchStudents = async () => {
@@ -50,6 +50,19 @@ const App = () => {
     const updatedStudents = [...students, { id, ...newStudent }];
     setStudents(updatedStudents);
     localStorage.setItem('students', JSON.stringify(updatedStudents));
+    setMessage('Student registered successfully'); // Set success message
+    setTimeout(() => setMessage(null), 3000); // Hide message after 3 seconds
+  };
+
+  // Edit student
+  const updateStudent = (updatedStudent) => {
+    const updatedStudents = students.map((student) =>
+      student.id === updatedStudent.id ? updatedStudent : student
+    );
+    setStudents(updatedStudents);
+    localStorage.setItem('students', JSON.stringify(updatedStudents));
+    setMessage('Student updated successfully'); // Set success message
+    setTimeout(() => setMessage(null), 3000); // Hide message after 3 seconds
   };
 
   // Delete student
@@ -57,6 +70,8 @@ const App = () => {
     const updatedStudents = students.filter((student) => student.id !== id);
     setStudents(updatedStudents);
     localStorage.setItem('students', JSON.stringify(updatedStudents));
+    setMessage('Student deleted successfully'); // Set success message
+    setTimeout(() => setMessage(null), 3000); // Hide message after 3 seconds
   };
 
   if (loading) return <p>Loading students...</p>;
@@ -72,9 +87,16 @@ const App = () => {
   return (
     <Router>
       <Navigation />
+      {message && (
+        <div className="alert alert-success alert-dismissible fade show" role="alert">
+          {message}
+          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      )}
       <Routes>
+        <Route path="/dashboard" element={<Dashboard students={students} />} />
         <Route
-          path="/"
+          path="/studentlist"
           element={<StudentList students={students} deleteStudent={deleteStudent} />}
         />
         <Route
@@ -85,7 +107,15 @@ const App = () => {
           path="/student/:id"
           element={<StudentDetails students={students} />}
         />
+        <Route
+          path="/student/edit/:id"
+          element={<StudentEdit students={students} updateStudent={updateStudent} />}
+        />
+
+          <Route path="*" element={<Dashboard students={students} />} />
       </Routes>
+     
+
     </Router>
   );
 };
